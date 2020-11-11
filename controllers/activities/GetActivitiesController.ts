@@ -1,7 +1,7 @@
-import { Controller } from '../interfaces/Controller';
+import { Controller } from '../../interfaces/Controller';
 import { Request, Response } from 'express';
 
-class GetToursController implements Controller{
+class GetActivitiesController implements Controller{
     execute(req: Request, res: Response): void{
         res.json([
             { id: 1, title: "Cooking salads", date: "November 9, 2020", image: "https://source.unsplash.com/uQs1802D0CQ",
@@ -28,7 +28,7 @@ class GetToursController implements Controller{
     }
 }
 
-export default new GetToursController();
+export default new GetActivitiesController();
 export {
-    GetToursController
+    GetActivitiesController
 }
