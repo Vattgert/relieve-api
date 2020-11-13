@@ -1,5 +1,5 @@
 import { activityControllers } from '../controllers';
-import { API_VERSION, createRoute} from '../utils/routes';
+
 
 const { 
     getActivitiesController, 
@@ -7,21 +7,24 @@ const {
     createActivityController
 } = activityControllers
 
-const topLevelRoute = "/activities"
-
-export default [
+const routes = [
     { 
-        path: createRoute(API_VERSION, topLevelRoute, "/"), 
+        path: "/", 
         controller: getActivitiesController, 
         method: "get" 
     },
     { 
-        path: createRoute(API_VERSION, topLevelRoute, "/:activityId"), 
+        path: "/:activityId", 
         controller: getActivityController, 
         method: "get" },
     { 
-        path: createRoute(API_VERSION, topLevelRoute, "/"), 
+        path: "/", 
         controller: createActivityController, 
         method: "post" 
     }
 ]
+
+export default {
+    path: "/activities",
+    routes
+}

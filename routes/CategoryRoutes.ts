@@ -1,12 +1,16 @@
 import { categoryControllers } from '../controllers';
-import { API_VERSION, createRoute} from '../utils/routes';
-const { getTopCategoriesController } = categoryControllers
-const topLevelRoute = "/categories";
 
-export default [
+const { getTopCategoriesController } = categoryControllers
+
+const routes = [
     { 
-        path: createRoute(API_VERSION, topLevelRoute, "/"), 
+        path: "/", 
         controller: getTopCategoriesController, 
         method: "get" 
     },
 ]
+
+export default {
+    path: "/categories",
+    routes
+}
