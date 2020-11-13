@@ -1,9 +1,5 @@
 import express from 'express';
 
-import authRoutes from './routes/AuthRoutes';
-import tourRoutes from './routes/ActivityRoutes';
-import categoryRoutes from './routes/CategoryRoutes';
-
 import { setupCors } from './loaders/corsSetup';
 import { setupRoutes } from './loaders/routesSetup';
 

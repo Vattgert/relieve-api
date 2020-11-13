@@ -1,13 +1,27 @@
-import { Router } from 'express';
-const router = Router();
+import { activityControllers } from '../controllers';
+import { API_VERSION, createRoute} from '../utils/routes';
 
-import getActivitiesController from '../controllers/activities/GetActivitiesController';
-import getActivityController from '../controllers/activities/GetActivityController';
-import createActivityController from '../controllers/activities/CreateActivityController';
+const { 
+    getActivitiesController, 
+    getActivityController, 
+    createActivityController
+} = activityControllers
 
-router.get("/", getActivitiesController.execute);
-router.get("/:activityId", getActivityController.execute);
-router.post("/", createActivityController.execute);
+const topLevelRoute = "/activities"
 
-
-export default router;
+export default [
+    { 
+        path: createRoute(API_VERSION, topLevelRoute, "/"), 
+        controller: getActivitiesController, 
+        method: "get" 
+    },
+    { 
+        path: createRoute(API_VERSION, topLevelRoute, "/:activityId"), 
+        controller: getActivityController, 
+        method: "get" },
+    { 
+        path: createRoute(API_VERSION, topLevelRoute, "/"), 
+        controller: createActivityController, 
+        method: "post" 
+    }
+]

@@ -1,9 +1,10 @@
-import authRouter from './AuthRoutes';
-import activityRouter from './ActivityRoutes';
-import categoryRouter from './CategoryRoutes';
+import activityRoutes from './activityRoutes';
+import categoryRoutes from './categoryRoutes';
 
-export {
-    authRouter, 
-    activityRouter,
-    categoryRouter
-}
+const allRoutes = [
+    ...activityRoutes,
+    ...categoryRoutes
+];
+
+export default allRoutes;
+
