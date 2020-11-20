@@ -1,0 +1,5 @@
+interface Database{
+
+}
+
+export { Database }

@@ -4,7 +4,7 @@ const { getTopCategoriesController } = categoryControllers
 
 const routes = [
     { 
-        path: "/", 
+        path: "/top", 
         controller: getTopCategoriesController, 
         method: "get" 
     },
