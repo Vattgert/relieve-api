@@ -1,20 +1,19 @@
-import { IActivityDAO } from '../interfaces/dao/IActivityDAO';
-import { ActivityDAO } from '../dal/ActivityDAO';
-import { Activity } from '../models/Activity';
+
+import { getManager, EntityManager } from 'typeorm';
+import { Activity } from '../models';
 
 class ActivityService{
-    #activityDAO: IActivityDAO;
+    #entityManager: EntityManager;
 
-    constructor(activityDAO: IActivityDAO){
-        this.#activityDAO = activityDAO;
+    constructor(entiryManager: EntityManager){
+        this.#entityManager = entiryManager;
     }
 
-    async getTopActivities(): Promise<Activity[]>{
-        const activities = await this.#activityDAO.getAllActivities();
-        console.log(activities);
+    async getTopActivities(){
+        const activities = await this.#entityManager.find(Activity, { relations: ["host", "hostInfo"]});
         return activities;
     }
 }
 
-export default new ActivityService(new ActivityDAO());
+export default new ActivityService(getManager());
 export { ActivityService }

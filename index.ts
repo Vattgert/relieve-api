@@ -3,6 +3,8 @@ import 'reflect-metadata';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import './database/TypeORMConnection';
+
 import express from 'express';
 
 import { setupCors } from './loaders/corsSetup';

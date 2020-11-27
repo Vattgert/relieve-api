@@ -1,30 +1,30 @@
-import { IsInt, IsUrl, IsDate, Length } from 'class-validator';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Host } from './Host';
 
-import { Location } from './Location';
-import { User } from './User'; 
+@Entity("activities")
+class Activity {
 
-class Activity{
-    @IsInt()
-    id: number; 
+    @PrimaryGeneratedColumn()
+    id: number;
 
-    @Length(200)
+    @Column()
     title: string;
 
-    @IsUrl()
-    image: string;
-    
-    @IsDate()
+    @Column()
     date: string;
 
-    location: Location;
+    @Column()
+    image: string;
 
-    constructor(id: number, title: string, image: string, date: string, location: Location){
-        this.id = id;
-        this.title = title;
-        this.image = image;
-        this.date = date;
-        this.location = location;
-    }
+    @Column()
+    country: string;
+
+    @Column()
+    city: string;
+
+    @ManyToOne(() => Host, host => host.activities)
+    @JoinColumn({ name: "host_id" })
+    host: Host;
 }
 
 export { Activity }
