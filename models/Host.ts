@@ -9,8 +9,8 @@ class Host{
     id: number;
 
     @OneToOne(() => Customer)
-    @JoinColumn({ name: "user_id" })
-    hostInfo: Customer;
+    @JoinColumn({ name: "user_id", referencedColumnName: "id" })
+    profile: Customer;
 
     @OneToMany(() => Activity, activity => activity.host)
     activities: Activity[];

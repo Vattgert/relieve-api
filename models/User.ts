@@ -3,10 +3,10 @@ import { IsUrl } from 'class-validator';
 
 abstract class User {
 
-    @Column()
+    @Column({ name: "first_name" })
     firstName: string;
 
-    @Column()
+    @Column({ name: "last_name" })
     lastName: string;
 
     @Column()

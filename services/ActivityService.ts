@@ -10,7 +10,7 @@ class ActivityService{
     }
 
     async getTopActivities(){
-        const activities = await this.#entityManager.find(Activity, { relations: ["host", "hostInfo"]});
+        const activities = await this.#entityManager.find(Activity, { relations: ["host", "host.profile"] });
         return activities;
     }
 }
