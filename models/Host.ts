@@ -1,16 +1,13 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
 import { Activity } from './Activity';
-import { Customer } from './Customer';
+import { User } from './User';
 
-@Entity("hosts")
-class Host{
+
+@Entity("users")
+class Host extends User{
 
     @PrimaryGeneratedColumn()
     id: number;
-
-    @OneToOne(() => Customer)
-    @JoinColumn({ name: "user_id", referencedColumnName: "id" })
-    profile: Customer;
 
     @OneToMany(() => Activity, activity => activity.host)
     activities: Activity[];

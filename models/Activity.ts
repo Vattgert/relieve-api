@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
+import { Customer } from "./Customer";
 import { Host } from './Host';
 
 @Entity("activities")
