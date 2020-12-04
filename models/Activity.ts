@@ -1,6 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
-import { Customer } from "./Customer";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany, JoinTable, OneToMany } from "typeorm";
+import { Tag } from "./Tag";
 import { Host } from './Host';
+import { Vote } from './Vote';
+import { Like } from './Like';
 
 @Entity("activities")
 class Activity {
@@ -23,9 +25,30 @@ class Activity {
     @Column()
     city: string;
 
+    totalLikes: number;
+
     @ManyToOne(() => Host, host => host.activities)
     @JoinColumn({ name: "host_id" })
     host: Host;
+
+    @ManyToMany(() => Tag)
+    @JoinTable({
+        name: "activity_tags",
+        joinColumn: { name: "activity_id" },
+        inverseJoinColumn: { name: "tag_id" }
+    })
+    tags: Tag[];
+
+    @OneToMany(() => Vote, vote => vote.activity)
+    votes: Vote[];
+
+    @OneToMany(() => Like, like => like.activity)
+    @JoinTable({ name: "likes", joinColumn: { name: "id" } })
+    likes: Like[];
+
+    /*
+    similarActivities: []
+    category: string*/
 }
 
 export { Activity }

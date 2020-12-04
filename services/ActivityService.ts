@@ -1,6 +1,7 @@
 
 import { getManager, EntityManager } from 'typeorm';
 import { Activity } from '../models';
+import likesService from '../services/LikesService';
 
 class ActivityService{
     #entityManager: EntityManager;
@@ -16,15 +17,31 @@ class ActivityService{
             column: "date",
             type: "DESC"
         }
-    }): Promise<Activity[]>{
+    }): Promise<Activity[]> {
         const { take, skip, order: { column, type } } = options;
         return this.#entityManager.find(Activity, 
             { 
-                relations: ["host"], 
+                relations: ["host", "tags"], 
                 take, skip, 
                 order: { [column]: type } 
             }
         );
+    }
+
+    async getActivityById(id: number | string): Promise<Activity>{
+        const { count } = await likesService.getLikesByActivity(id);
+        const activity = await this.#entityManager.createQueryBuilder(Activity, "activity")
+            .leftJoinAndSelect("activity.host", "host")
+            .leftJoinAndSelect("activity.tags", "tags")
+            .leftJoinAndSelect("activity.votes", "votes")
+            .leftJoinAndSelect("votes.voter", "voter")
+            .leftJoinAndSelect("activity.likes", "likes")
+            .leftJoinAndSelect("likes.liker", "liker")
+            .where("activity.id = :id", { id: id })
+            .getOne();
+        activity.totalLikes = count;
+        
+        return activity;
     }
 }
 

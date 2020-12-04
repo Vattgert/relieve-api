@@ -1,5 +1,5 @@
 import { createConnection } from "typeorm";
-import { Activity, Host, Customer } from '../models';
+import { Activity, Host, Customer, Tag, Vote, Like } from '../models';
 
 createConnection({
     type: "postgres",
@@ -9,7 +9,7 @@ createConnection({
     password: process.env.DB_LOCAL_PASS,
     database: process.env.DB_LOCAL_NAME,
     entities: [
-        Activity, Host, Customer
+        Activity, Host, Customer, Tag, Vote, Like
     ],
     logging: ["query", "error"]
 });
