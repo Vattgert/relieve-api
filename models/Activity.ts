@@ -25,6 +25,9 @@ class Activity {
     @Column()
     city: string;
 
+    @Column({ length: 1000 })
+    description: string
+
     totalLikes: number;
 
     @ManyToOne(() => Host, host => host.activities)

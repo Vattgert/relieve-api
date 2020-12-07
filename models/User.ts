@@ -22,6 +22,10 @@ abstract class User {
     @Column()
     company: string;
 
+    myActivitiesCount: number;
+    likesCount: number;
+    votesCount: number;
+
 }
 
 export { User }
