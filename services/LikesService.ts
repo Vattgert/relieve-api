@@ -1,15 +1,16 @@
-import { getManager, EntityManager } from 'typeorm';
+import { ILikeService } from '../interfaces/services/ILikeService';
+import { EntityManager } from 'typeorm';
 import { Like } from '../models';
+import { injectable, inject } from "inversify";
+import { TYPES } from '../di/types';
 
-class LikesService{
-    #entityManager: EntityManager;
-
-    constructor(entiryManager: EntityManager){
-        this.#entityManager = entiryManager;
-    }
+@injectable()
+class LikesService implements ILikeService{
+    @inject(TYPES.EntityManager) 
+    private entityManager: EntityManager;
 
     async getLikesCountByActivity(activityId: number | string){
-        const count = await this.#entityManager.createQueryBuilder()
+        const count = await this.entityManager.createQueryBuilder()
             .select("COUNT(likes.id)")
             .from(Like, "likes")
             .where("likes.activity_id = :id", { id: activityId})
@@ -18,7 +19,7 @@ class LikesService{
     }
 
     async getLikesCountByUser(userId: number | string){
-        const count = await this.#entityManager.createQueryBuilder()
+        const count = await this.entityManager.createQueryBuilder()
             .select("COUNT(likes.id)", "likesCount")
             .from(Like, "likes")
             .where("likes.user_id = :userId", { userId })
@@ -27,5 +28,4 @@ class LikesService{
     }
 }
 
-export default new LikesService(getManager())
 export { LikesService }

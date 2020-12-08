@@ -2,6 +2,7 @@
     "compilerOptions": {
       "target": "es6",
       "lib": ["es6"],
+      "types": ["reflect-metadata"],
       "module": "commonjs",
       "rootDir": "./",
       "outDir": "./build",

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import './database/TypeORMConnection';
+import './di/compositionRoot';
 
 import express from 'express';
 

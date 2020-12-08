@@ -1,7 +1,16 @@
+import { inject } from 'inversify';
 import { activityControllers } from '../controllers';
+import { TYPES } from '../di/types';
+import { Controller } from '../interfaces/Controller';
 
+class ActivityRoutes{
+    @inject(TYPES.Controller)
+    private getActivitiesController: Controller;
+}
 
-const { 
+export { ActivityRoutes }
+
+/*const { 
     getActivitiesController, 
     getActivityController, 
     createActivityController
@@ -27,4 +36,4 @@ const routes = [
 export default {
     path: "/activities",
     routes
-}
+}*/

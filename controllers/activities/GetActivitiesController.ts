@@ -1,15 +1,17 @@
+import { inject, injectable } from 'inversify';
+import { TYPES } from '../../di/types';
+
 import { Controller } from '../../interfaces/Controller';
-import { Request, Response, NextFunction } from 'express';
-import activityService from '../../services/ActivityService';
-import { ActivityService } from '../../services/ActivityService';
+import { IActivityService } from '../../interfaces/services/IActivityService';
 import { ActivitySearchParams } from '../../utils/requests/ActivitySearchOptions';
 
-class GetActivitiesController implements Controller{
-    #activityService: ActivityService;
+import { Request, Response, NextFunction } from 'express';
 
-    constructor(){
-        this.#activityService = activityService;
-    }
+
+@injectable()
+class GetActivitiesController implements Controller{ 
+    @inject(TYPES.ActivityService) 
+    private activityService: IActivityService;
 
     execute(req: Request, res: Response, next: NextFunction): void{
         const { host, liked, voted, user } = req.query;
@@ -22,17 +24,18 @@ class GetActivitiesController implements Controller{
         searchParams.user = user ? user.toString() : '';
         searchParams.liked = liked === '';
         searchParams.voted = voted === '';
-
-        const activitiesPromise = activityService.getActivities(searchParams);
+        //Temporarily type cast
+        console.log(this.activityService);
+        res.send({ lol: "lol" });
+        /*const activitiesPromise = activityService.getActivities(searchParams);
         activitiesPromise.then(activities => {
             res.json(activities);
         }).catch(error => {
             console.log(error);
-        });
+        });*/
     }
 }
 
-export default new GetActivitiesController();
 export {
     GetActivitiesController
 }
