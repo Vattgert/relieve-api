@@ -10,7 +10,7 @@ class GetActivityController implements Controller{
         this.#activityService = activityService;
     }
 
-    execute(req: Request, res: Response): void{
+    async execute(req: Request, res: Response): Promise<any>{
         const { activityId } = req.params;
         const activityPromise = activityService.getActivityById(activityId);
         activityPromise.then(activity => {

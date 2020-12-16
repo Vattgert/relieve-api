@@ -11,7 +11,7 @@ class GetActivitiesController implements Controller{
         this.#activityService = activityService;
     }
 
-    execute(req: Request, res: Response, next: NextFunction): void{
+    async execute(req: Request, res: Response, next: NextFunction): Promise<any>{
         const { host, liked, voted, user } = req.query;
         const searchParams = new ActivitySearchParams();
         searchParams.limit = 20;
