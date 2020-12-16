@@ -13,7 +13,7 @@ class ProfileService{
     }
 
     async getProfileById(userId: number | string): Promise<Customer>{
-        const { likesCount } = await likeService.getLikesCountByUser(userId);
+        const likesCount = await likeService.getLikesCountByUser(userId);
         const { votesCount } = await voteService.getVotesCountByUser(userId);
 
         const profile = await this.#entityManager.createQueryBuilder(Customer, "profile")

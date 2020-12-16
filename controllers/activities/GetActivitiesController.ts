@@ -11,24 +11,32 @@ class GetActivitiesController implements Controller{
         this.#activityService = activityService;
     }
 
-    execute(req: Request, res: Response, next: NextFunction): void{
-        const { host, liked, voted, user } = req.query;
-        const searchParams = new ActivitySearchParams();
-        searchParams.limit = 20;
-        searchParams.offset = 0;
-        searchParams.order = "date";
-        searchParams.orderType = "desc";
-        searchParams.host = host ? host.toString() : '';
-        searchParams.user = user ? user.toString() : '';
-        searchParams.liked = liked === '';
-        searchParams.voted = voted === '';
+    async execute(req: Request, res: Response, next: NextFunction): Promise<any>{
+        try{
+            const searchParams = this.getActivityParamsFromRequest(req);
+            const activities = await activityService.getActivities(searchParams);
+            if(activities){
+                res.status(200).json(activities)
+            } else {
+                throw new Error("Error while fetching activities");
+            }
+        } catch(error) {
+            res.send(error);
+        }
+    }
 
-        const activitiesPromise = activityService.getActivities(searchParams);
-        activitiesPromise.then(activities => {
-            res.json(activities);
-        }).catch(error => {
-            console.log(error);
-        });
+    getActivityParamsFromRequest(req: Request): ActivitySearchParams{
+        const { host, liked, voted, user } = req.query;
+        const activitiesParams = new ActivitySearchParams();
+        activitiesParams.limit = 20;
+        activitiesParams.offset = 0;
+        activitiesParams.order = "date";
+        activitiesParams.orderType = "desc";
+        activitiesParams.host = host ? host.toString() : '';
+        activitiesParams.user = user ? user.toString() : '';
+        activitiesParams.liked = liked === '';
+        activitiesParams.voted = voted === '';
+        return new ActivitySearchParams()
     }
 }
 

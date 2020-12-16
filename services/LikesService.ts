@@ -1,15 +1,11 @@
-import { getManager, EntityManager } from 'typeorm';
+import { BaseService } from './BaseService';
+import { ILikeService } from '../interfaces/services';
 import { Like } from '../models';
 
-class LikesService{
-    #entityManager: EntityManager;
+class LikesService extends BaseService implements ILikeService{
 
-    constructor(entiryManager: EntityManager){
-        this.#entityManager = entiryManager;
-    }
-
-    async getLikesCountByActivity(activityId: number | string){
-        const count = await this.#entityManager.createQueryBuilder()
+    async getLikesCountByActivity(activityId: number | string): Promise<number>{
+        const count = await this.getManager().createQueryBuilder()
             .select("COUNT(likes.id)")
             .from(Like, "likes")
             .where("likes.activity_id = :id", { id: activityId})
@@ -17,8 +13,8 @@ class LikesService{
         return count;
     }
 
-    async getLikesCountByUser(userId: number | string){
-        const count = await this.#entityManager.createQueryBuilder()
+    async getLikesCountByUser(userId: number | string): Promise<number>{
+        const count = await this.getManager().createQueryBuilder()
             .select("COUNT(likes.id)", "likesCount")
             .from(Like, "likes")
             .where("likes.user_id = :userId", { userId })
@@ -27,5 +23,5 @@ class LikesService{
     }
 }
 
-export default new LikesService(getManager())
+export default new LikesService();
 export { LikesService }

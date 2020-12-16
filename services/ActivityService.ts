@@ -1,19 +1,24 @@
 
-import { getManager, EntityManager } from 'typeorm';
-import { ActivitySearchParams } from '../utils/requests/ActivitySearchOptions';
+import { BaseService } from './BaseService';
+import { IActivityService, ILikeService } from '../interfaces/services';
+
 import { Activity } from '../models';
+import { ActivitySearchParams } from '../utils/requests/ActivitySearchOptions';
+
+
 import likesService from '../services/LikesService';
 
-class ActivityService{
-    #entityManager: EntityManager;
+class ActivityService extends BaseService implements IActivityService{
+    private likesService: ILikeService;
 
-    constructor(entiryManager: EntityManager){
-        this.#entityManager = entiryManager;
+    constructor(likeService: ILikeService){
+        super();
+        this.likesService = likeService;
     }
 
     async getActivities(options: ActivitySearchParams): Promise<Activity[]> {
         const { limit, offset, order, orderType, host, liked, voted, user } = options;
-        const activitiesQuery = this.#entityManager.createQueryBuilder(Activity, "activities")
+        const activitiesQuery = this.getManager().createQueryBuilder(Activity, "activities")
             .leftJoinAndSelect("activities.host", "host")
             .leftJoinAndSelect("activities.tags", "tags")
             .leftJoin("activities.likes", "likes").limit(5)
@@ -33,8 +38,8 @@ class ActivityService{
     }
 
     async getActivityById(id: number | string): Promise<Activity>{
-        const { count } = await likesService.getLikesCountByActivity(id);
-        const activity = await this.#entityManager.createQueryBuilder(Activity, "activity")
+        const count = await this.likesService.getLikesCountByActivity(id);
+        const activity = await this.getManager().createQueryBuilder(Activity, "activity")
             .leftJoinAndSelect("activity.host", "host")
             .leftJoinAndSelect("activity.tags", "tags")
             .leftJoinAndSelect("activity.votes", "votes").limit(20)
@@ -49,5 +54,5 @@ class ActivityService{
     }
 }
 
-export default new ActivityService(getManager());
+export default new ActivityService(likesService);
 export { ActivityService }
