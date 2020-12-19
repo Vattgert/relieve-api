@@ -16,9 +16,11 @@ const getActivitiesController = container.get<Controller>(TYPES.GetActivitiesCon
 const getActivityController = container.get<Controller>(TYPES.GetActivityController);*/
 
 const activityRouter = container.get<IRouter>(TYPES.ActivityRouter);
+const categoryRouter = container.get<IRouter>(TYPES.CategoryRouter);
 
 const routers = [
-    activityRouter
+    activityRouter,
+    categoryRouter
 ]
 
 export {

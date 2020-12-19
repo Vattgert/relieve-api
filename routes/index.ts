@@ -1,13 +1,7 @@
-import categoryRoutes from './categoryRoutes';
-import profileRoutes from './profileRoutes';
+import { ActivityRouter } from './ActivityRouter';
+import { CategoryRouter } from './CategoryRouter';
 
-/*const allRoutes = [
-    activityRoutes,
-    categoryRoutes,
-    profileRoutes
-];*/
-
-const allRoutes = [];
-
-export default allRoutes;
-
+export {
+    ActivityRouter,
+    CategoryRouter
+}

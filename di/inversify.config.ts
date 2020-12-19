@@ -10,16 +10,19 @@ import { ActivityService, ProfileService, VoteService, LikesService } from "../s
 
 import { GetActivitiesController } from '../controllers/activities/GetActivitiesController';
 import { GetActivityController } from '../controllers/activities/GetActivityController';
+import { GetTopCategoriesController } from '../controllers/categories';
 
-import { ActivityRouter } from '../routes/ActivityRouter';
+import { ActivityRouter, CategoryRouter } from '../routes';
 
 const container = new Container();
 /*Bind Routers */
 container.bind<IRouter>(TYPES.ActivityRouter).to(ActivityRouter);
+container.bind<IRouter>(TYPES.CategoryRouter).to(CategoryRouter);
 
 /* Bind Controllers */
 container.bind<Controller>(TYPES.GetActivitiesController).to(GetActivitiesController);
 container.bind<Controller>(TYPES.GetActivityController).to(GetActivityController);
+container.bind<Controller>(TYPES.GetTopCategoriesController).to(GetTopCategoriesController);
 
 /* Bind Services */
 container.bind<IActivityService>(TYPES.ActivityService).to(ActivityService);
