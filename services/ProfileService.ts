@@ -1,22 +1,25 @@
-import { getManager, EntityManager } from 'typeorm';
+import { Service } from '../interfaces/Service';
+import { EntityManager } from 'typeorm';
 
 import { Customer } from '../models';
 
-import likeService from './LikesService';
 import voteService from './VoteService';
+import { injectable, inject } from "inversify";
+import { TYPES } from '../di/types';
+import { ILikeService } from '../interfaces/services/ILikeService';
 
-class ProfileService{
-    #entityManager: EntityManager;
+import { BaseService } from './BaseService';
 
-    constructor(entiryManager: EntityManager){
-        this.#entityManager = entiryManager;
-    }
+@injectable()
+class ProfileService extends BaseService implements Service{
+    @inject(TYPES.LikeService)
+    private likeService: ILikeService;
 
     async getProfileById(userId: number | string): Promise<Customer>{
-        const { likesCount } = await likeService.getLikesCountByUser(userId);
+        const { likesCount } = await this.likeService.getLikesCountByUser(userId);
         const { votesCount } = await voteService.getVotesCountByUser(userId);
 
-        const profile = await this.#entityManager.createQueryBuilder(Customer, "profile")
+        const profile = await this.entityManager.createQueryBuilder(Customer, "profile")
             .where("profile.id = :userId", { userId })
             .getOne();
 
@@ -27,5 +30,5 @@ class ProfileService{
     }
 }
 
-export default new ProfileService(getManager())
+export default new ProfileService()
 export { ProfileService }

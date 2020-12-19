@@ -2,7 +2,7 @@ import { Controller } from '../../interfaces/Controller';
 import { Request, Response } from 'express';
 
 class GetTopCategoriesController implements Controller{
-    execute(req: Request, res: Response): void{
+    async execute(req: Request, res: Response): Promise<any>{
         const resourceUrl = "/categories";
         res.json([
             { id: 1, title: "Outdoors", link: `${resourceUrl}/1`},

@@ -1,9 +1,9 @@
 import { Express } from 'express';
-import allRoutes from '../routes';
+import { IRouter } from '../interfaces/Route';
 import { applyRoutes } from '../utils/routes';
 
-function setupRoutes(app: Express){
-    applyRoutes(allRoutes, app);
+function setupRoutes(app: Express, routers: IRouter[]){
+    applyRoutes(routers, app);
 }
 
 export { setupRoutes };

@@ -1,15 +1,14 @@
-import { getManager, EntityManager } from 'typeorm';
+import { EntityManager } from 'typeorm';
 import { Vote } from '../models';
+import { Service } from '../interfaces/Service';
+import { injectable, inject } from "inversify";
+import { TYPES } from '../di/types';
+import { BaseService } from './BaseService';
 
-class VoteService{
-    #entityManager: EntityManager;
-
-    constructor(entiryManager: EntityManager){
-        this.#entityManager = entiryManager;
-    }
-
+@injectable()
+class VoteService extends BaseService implements Service{
     async getVotesCountByUser(userId: number | string){
-        const count = await this.#entityManager.createQueryBuilder()
+        const count = await this.entityManager.createQueryBuilder()
             .select("COUNT(votes.id)", "votesCount")
             .from(Vote, "votes")
             .where("votes.user_id = :userId", { userId })
@@ -18,5 +17,5 @@ class VoteService{
     }
 }
 
-export default new VoteService(getManager())
+export default new VoteService()
 export { VoteService }

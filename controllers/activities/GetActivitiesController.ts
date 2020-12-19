@@ -1,17 +1,24 @@
+import { inject, injectable } from 'inversify';
+import { TYPES } from '../../di/types';
+
 import { Controller } from '../../interfaces/Controller';
-import { Request, Response, NextFunction } from 'express';
-import activityService from '../../services/ActivityService';
-import { ActivityService } from '../../services/ActivityService';
+import { IActivityService } from '../../interfaces/services/IActivityService';
 import { ActivitySearchParams } from '../../utils/requests/ActivitySearchOptions';
 
-class GetActivitiesController implements Controller{
-    #activityService: ActivityService;
+import { Request, Response, NextFunction } from 'express';
 
-    constructor(){
-        this.#activityService = activityService;
+
+@injectable()
+class GetActivitiesController implements Controller{ 
+    public activityService: IActivityService;
+
+    constructor(
+        @inject(TYPES.ActivityService) activityService: IActivityService
+    ){
+        this.activityService = activityService;
     }
 
-    execute(req: Request, res: Response, next: NextFunction): void{
+    async execute(req: Request, res: Response, next: NextFunction): Promise<any>{
         const { host, liked, voted, user } = req.query;
         const searchParams = new ActivitySearchParams();
         searchParams.limit = 20;
@@ -22,17 +29,18 @@ class GetActivitiesController implements Controller{
         searchParams.user = user ? user.toString() : '';
         searchParams.liked = liked === '';
         searchParams.voted = voted === '';
+        //Temporarily type cast
+        //res.send({ lol: "lol" });
 
-        const activitiesPromise = activityService.getActivities(searchParams);
-        activitiesPromise.then(activities => {
-            res.json(activities);
-        }).catch(error => {
-            console.log(error);
-        });
+        try{
+            const activities = await this.activityService.getActivities(searchParams);
+            res.send(activities);
+        } catch(error) {
+            res.send({ error })
+        }
     }
 }
 
-export default new GetActivitiesController();
 export {
     GetActivitiesController
 }

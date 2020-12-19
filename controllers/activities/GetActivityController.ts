@@ -1,18 +1,17 @@
 import { Controller } from '../../interfaces/Controller';
 import { Request, Response } from 'express';
-import activityService from '../../services/ActivityService';
-import { ActivityService } from '../../services/ActivityService';
+import { IActivityService } from '../../interfaces/services/IActivityService';
+import { TYPES } from '../../di/types';
+import { inject, injectable } from 'inversify';
 
+@injectable()
 class GetActivityController implements Controller{
-    #activityService: ActivityService;
+    @inject(TYPES.ActivityService) 
+    private activityService: IActivityService;
 
-    constructor(){
-        this.#activityService = activityService;
-    }
-
-    execute(req: Request, res: Response): void{
+    async execute(req: Request, res: Response): Promise<any>{
         const { activityId } = req.params;
-        const activityPromise = activityService.getActivityById(activityId);
+        const activityPromise = this.activityService.getActivityById(activityId);
         activityPromise.then(activity => {
             if(activity){
                 res.send(activity)
@@ -20,7 +19,6 @@ class GetActivityController implements Controller{
                 throw new Error("Activity cannot be found")
             }
         }).catch(error => {
-            console.log(error);
             res.send({ "error": error.message })
         });
     }

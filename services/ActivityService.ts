@@ -1,19 +1,25 @@
-
-import { getManager, EntityManager } from 'typeorm';
+import { IActivityService } from '../interfaces/services/IActivityService';
+import { EntityManager } from 'typeorm';
 import { ActivitySearchParams } from '../utils/requests/ActivitySearchOptions';
+import { ILikeService } from '../interfaces/services/ILikeService';
 import { Activity } from '../models';
-import likesService from '../services/LikesService';
+import { injectable, inject } from "inversify";
+import { TYPES } from '../di/types';
+import { BaseService } from './BaseService';
 
-class ActivityService{
-    #entityManager: EntityManager;
+@injectable()
+class ActivityService extends BaseService implements IActivityService{
+    public likesService: ILikeService;
 
-    constructor(entiryManager: EntityManager){
-        this.#entityManager = entiryManager;
+    constructor(
+        @inject(TYPES.LikeService) likesService: ILikeService
+    ){
+        super();
     }
 
     async getActivities(options: ActivitySearchParams): Promise<Activity[]> {
         const { limit, offset, order, orderType, host, liked, voted, user } = options;
-        const activitiesQuery = this.#entityManager.createQueryBuilder(Activity, "activities")
+        const activitiesQuery = this.entityManager.createQueryBuilder(Activity, "activities")
             .leftJoinAndSelect("activities.host", "host")
             .leftJoinAndSelect("activities.tags", "tags")
             .leftJoin("activities.likes", "likes").limit(5)
@@ -33,8 +39,8 @@ class ActivityService{
     }
 
     async getActivityById(id: number | string): Promise<Activity>{
-        const { count } = await likesService.getLikesCountByActivity(id);
-        const activity = await this.#entityManager.createQueryBuilder(Activity, "activity")
+        const { count } = await this.likesService.getLikesCountByActivity(id);
+        const activity = await this.entityManager.createQueryBuilder(Activity, "activity")
             .leftJoinAndSelect("activity.host", "host")
             .leftJoinAndSelect("activity.tags", "tags")
             .leftJoinAndSelect("activity.votes", "votes").limit(20)
@@ -49,5 +55,4 @@ class ActivityService{
     }
 }
 
-export default new ActivityService(getManager());
 export { ActivityService }
