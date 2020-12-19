@@ -1,9 +1,7 @@
 import { Container } from "inversify";
 import { TYPES } from "./types";
-import { Service } from "../interfaces/Service";
 import { Controller } from '../interfaces/Controller';
-import { IActivityService } from '../interfaces/services/IActivityService';
-import { ILikeService } from '../interfaces/services/ILikeService';
+import { IActivityService, ILikeService, IVoteService, IProfileService } from '../interfaces/services/';
 import { IRouter } from '../interfaces/Route';
 
 import { ActivityService, ProfileService, VoteService, LikesService } from "../services";
@@ -11,23 +9,27 @@ import { ActivityService, ProfileService, VoteService, LikesService } from "../s
 import { GetActivitiesController } from '../controllers/activities/GetActivitiesController';
 import { GetActivityController } from '../controllers/activities/GetActivityController';
 import { GetTopCategoriesController } from '../controllers/categories';
+import { GetProfileController } from '../controllers/profiles';
 
-import { ActivityRouter, CategoryRouter } from '../routes';
+import { ActivityRouter, CategoryRouter, ProfileRouter } from '../routes';
 
 const container = new Container();
+
 /*Bind Routers */
 container.bind<IRouter>(TYPES.ActivityRouter).to(ActivityRouter);
 container.bind<IRouter>(TYPES.CategoryRouter).to(CategoryRouter);
+container.bind<IRouter>(TYPES.ProfileRouter).to(ProfileRouter);
 
 /* Bind Controllers */
 container.bind<Controller>(TYPES.GetActivitiesController).to(GetActivitiesController);
 container.bind<Controller>(TYPES.GetActivityController).to(GetActivityController);
 container.bind<Controller>(TYPES.GetTopCategoriesController).to(GetTopCategoriesController);
+container.bind<Controller>(TYPES.GetProfileController).to(GetProfileController);
 
 /* Bind Services */
 container.bind<IActivityService>(TYPES.ActivityService).to(ActivityService);
-container.bind<Service>(TYPES.ProfileService).to(ProfileService);
-container.bind<Service>(TYPES.VoteService).to(VoteService);
+container.bind<IProfileService>(TYPES.ProfileService).to(ProfileService);
+container.bind<IVoteService>(TYPES.VoteService).to(VoteService);
 container.bind<ILikeService>(TYPES.LikeService).to(LikesService);
 
 export { container }
