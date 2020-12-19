@@ -19,7 +19,6 @@ class GetActivityController implements Controller{
                 throw new Error("Activity cannot be found")
             }
         }).catch(error => {
-            console.log(error);
             res.send({ "error": error.message })
         });
     }

@@ -6,8 +6,6 @@ dotenv.config();
 import './database/TypeORMConnection';
 import { routers } from './di/compositionRoot';
 
-console.log(routers);
-
 import express from 'express';
 
 import { setupCors } from './loaders/corsSetup';

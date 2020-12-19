@@ -7,18 +7,15 @@ import { ILikeService } from '../interfaces/services/ILikeService';
 import { IRouter } from '../interfaces/Route';
 import { Controller } from "../interfaces/Controller";
 
-let activityService = container.get<IActivityService>(TYPES.ActivityService);
-let likeService = container.get<ILikeService>(TYPES.LikeService);
-let voteService = container.get<Service>(TYPES.VoteService);
-let profileService = container.get<Service>(TYPES.ProfileService);
+const activityService = container.get<IActivityService>(TYPES.ActivityService);
+const likeService = container.get<ILikeService>(TYPES.LikeService);
+const voteService = container.get<Service>(TYPES.VoteService);
+const profileService = container.get<Service>(TYPES.ProfileService);
 
 const getActivitiesController = container.get<Controller>(TYPES.GetActivitiesController);
 const getActivityController = container.get<Controller>(TYPES.GetActivityController);
 
 const activityRouter = container.get<IRouter>(TYPES.ActivityRouter);
-console.log(activityRouter);
-
-console.log(activityRouter);
 
 const services = {
     activityService, 

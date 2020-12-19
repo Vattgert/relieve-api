@@ -10,7 +10,7 @@ import { BaseService } from './BaseService';
 @injectable()
 class ActivityService extends BaseService implements IActivityService{
     @inject(TYPES.LikeService) 
-    private likesService: ILikeService;
+    public likesService: ILikeService;
 
     constructor(){
         super();

@@ -17,7 +17,6 @@ import { Activity, Host, Customer, Tag, Vote, Like } from '../models';
         })
         
         const query = await connection.query("select 1;");
-        console.log(query);
     } catch(error){
         console.error(error);
     }

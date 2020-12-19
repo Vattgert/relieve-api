@@ -11,7 +11,7 @@ import { Request, Response, NextFunction } from 'express';
 @injectable()
 class GetActivitiesController implements Controller{ 
     @inject(TYPES.ActivityService) 
-    private activityService: IActivityService;
+    public activityService: IActivityService;
 
     execute(req: Request, res: Response, next: NextFunction): void{
         const { host, liked, voted, user } = req.query;
@@ -25,7 +25,7 @@ class GetActivitiesController implements Controller{
         searchParams.liked = liked === '';
         searchParams.voted = voted === '';
         //Temporarily type cast
-        console.log(this.activityService);
+        //console.log(this.activityService);
         res.send({ lol: "lol" });
         /*const activitiesPromise = activityService.getActivities(searchParams);
         activitiesPromise.then(activities => {
@@ -35,7 +35,7 @@ class GetActivitiesController implements Controller{
         });*/
     }
 }
-export default new GetActivitiesController();
+
 export {
     GetActivitiesController
 }

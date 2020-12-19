@@ -1,6 +1,4 @@
 import { inject, injectable } from 'inversify';
-import { activityControllers } from '../controllers';
-import { controllers } from '../di/compositionRoot';
 import { TYPES } from '../di/types';
 import { Controller } from '../interfaces/Controller';
 import { IRouter, Route} from '../interfaces/Route';
@@ -8,7 +6,7 @@ import { IRouter, Route} from '../interfaces/Route';
 @injectable()
 class ActivityRouter implements IRouter{
     @inject(TYPES.GetActivitiesController) 
-    private getActivitiesController: Controller;
+    public getActivitiesController: Controller;
 
     @inject(TYPES.GetActivityController) 
     private getActivityController: Controller;
@@ -17,6 +15,7 @@ class ActivityRouter implements IRouter{
 
     constructor(){
         this.topPath = "/activities";
+        console.log(this.getActivitiesController);
     }
 
     getTopRoute(): string{
