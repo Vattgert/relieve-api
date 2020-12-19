@@ -1,5 +1,5 @@
-import getProfileController from './GetProfileController';
+import { GetProfileController } from './GetProfileController';
 
 export {
-    getProfileController
+    GetProfileController
 }

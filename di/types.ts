@@ -12,10 +12,12 @@ const TYPES = {
     GetActivitiesController: Symbol.for("GetActivitiesController"),
     GetActivityController: Symbol.for("GetActivityController"),
     GetTopCategoriesController: Symbol.for("GetTopCategoriesController"),
+    GetProfileController: Symbol.for("GetProfileController"),
 
     //Routes
     ActivityRouter: Symbol.for("ActivityRouter"),
-    CategoryRouter: Symbol.for("CategoryRouter")
+    CategoryRouter: Symbol.for("CategoryRouter"),
+    ProfileRouter: Symbol.for("ProfileRouter")
 
 }
 
