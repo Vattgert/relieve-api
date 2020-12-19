@@ -3,12 +3,13 @@ import { Router } from 'express';
 
 const API_VERSION = "/v1";
 
-function applyRoutes(routers: IRouter[], expressRouter: Router){
+async function applyRoutes(routers: IRouter[], expressRouter: Router){
     for (const router of routers) {
+      console.log(router);
       const routerTopPath = router.getTopRoute()
       for(const { method, path, controller } of router.getRoutes()){
-        console.log(controller);
-        (expressRouter as any)[method](createRoute(API_VERSION, routerTopPath, path), controller.execute);
+        const executeController = controller.execute;
+        (expressRouter as any)[method](createRoute(API_VERSION, routerTopPath, path), executeController.bind(controller));
       }
     }
 };

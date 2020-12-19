@@ -5,16 +5,22 @@ import { IRouter, Route} from '../interfaces/Route';
 
 @injectable()
 class ActivityRouter implements IRouter{
-    @inject(TYPES.GetActivitiesController) 
-    public getActivitiesController: Controller;
-
-    @inject(TYPES.GetActivityController) 
+    private getActivitiesController: Controller;
     private getActivityController: Controller;
 
     private topPath: string;
 
-    constructor(){
+    constructor(
+        @inject(TYPES.GetActivitiesController) getActivitiesController: Controller,
+        @inject(TYPES.GetActivityController) getActivityController: Controller
+    ){
         this.topPath = "/activities";
+        this.getActivitiesController = getActivitiesController;
+        this.getActivityController = getActivityController;
+
+        console.log("This is Activity router:")
+        console.log(this);
+        console.log("Activity router -> GetActivitiesController")
         console.log(this.getActivitiesController);
     }
 

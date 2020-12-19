@@ -1,5 +1,3 @@
-import { Entity } from "typeorm"
-
 const TYPES = {
     //Services
     Service: Symbol.for("Service"),
