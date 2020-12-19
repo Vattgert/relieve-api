@@ -17,11 +17,6 @@ class ActivityRouter implements IRouter{
         this.topPath = "/activities";
         this.getActivitiesController = getActivitiesController;
         this.getActivityController = getActivityController;
-
-        console.log("This is Activity router:")
-        console.log(this);
-        console.log("Activity router -> GetActivitiesController")
-        console.log(this.getActivitiesController);
     }
 
     getTopRoute(): string{

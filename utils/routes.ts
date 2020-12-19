@@ -5,7 +5,6 @@ const API_VERSION = "/v1";
 
 async function applyRoutes(routers: IRouter[], expressRouter: Router){
     for (const router of routers) {
-      console.log(router);
       const routerTopPath = router.getTopRoute()
       for(const { method, path, controller } of router.getRoutes()){
         const executeController = controller.execute;

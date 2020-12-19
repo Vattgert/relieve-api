@@ -16,15 +16,9 @@ class GetActivitiesController implements Controller{
         @inject(TYPES.ActivityService) activityService: IActivityService
     ){
         this.activityService = activityService;
-        console.log("This is GetActivitiesController:")
-        console.log(this);
-        console.log("GetActivitiesController -> ActivityService")
-        console.log(this.activityService);
     }
 
     async execute(req: Request, res: Response, next: NextFunction): Promise<any>{
-        console.log("execute controller");
-        console.log(this);
         const { host, liked, voted, user } = req.query;
         const searchParams = new ActivitySearchParams();
         searchParams.limit = 20;
@@ -39,11 +33,9 @@ class GetActivitiesController implements Controller{
         //res.send({ lol: "lol" });
 
         try{
-            console.log(this.activityService);
             const activities = await this.activityService.getActivities(searchParams);
             res.send(activities);
         } catch(error) {
-            console.log(error);
             res.send({ error })
         }
     }
