@@ -11,4 +11,9 @@ type Route = {
     controller: Controller
 }
 
-export { TopRoute, Route }
+interface IRouter{
+    getTopRoute(): string;
+    getRoutes(): Route[];
+}
+
+export { TopRoute, Route, IRouter }

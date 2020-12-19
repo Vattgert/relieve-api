@@ -4,10 +4,10 @@ import { Like } from '../models';
 import { injectable, inject } from "inversify";
 import { TYPES } from '../di/types';
 
+import { BaseService } from './BaseService';
+
 @injectable()
-class LikesService implements ILikeService{
-    @inject(TYPES.EntityManager) 
-    private entityManager: EntityManager;
+class LikesService extends BaseService implements ILikeService{
 
     async getLikesCountByActivity(activityId: number | string){
         const count = await this.entityManager.createQueryBuilder()

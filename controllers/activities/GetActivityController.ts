@@ -2,8 +2,9 @@ import { Controller } from '../../interfaces/Controller';
 import { Request, Response } from 'express';
 import { IActivityService } from '../../interfaces/services/IActivityService';
 import { TYPES } from '../../di/types';
-import { inject } from 'inversify';
+import { inject, injectable } from 'inversify';
 
+@injectable()
 class GetActivityController implements Controller{
     @inject(TYPES.ActivityService) 
     private activityService: IActivityService;

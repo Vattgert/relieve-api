@@ -8,11 +8,10 @@ import { injectable, inject } from "inversify";
 import { TYPES } from '../di/types';
 import { ILikeService } from '../interfaces/services/ILikeService';
 
-@injectable()
-class ProfileService implements Service{
-    @inject(TYPES.EntityManager) 
-    private entityManager: EntityManager;
+import { BaseService } from './BaseService';
 
+@injectable()
+class ProfileService extends BaseService implements Service{
     @inject(TYPES.LikeService)
     private likeService: ILikeService;
 

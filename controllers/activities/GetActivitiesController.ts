@@ -35,7 +35,7 @@ class GetActivitiesController implements Controller{
         });*/
     }
 }
-
+export default new GetActivitiesController();
 export {
     GetActivitiesController
 }

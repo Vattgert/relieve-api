@@ -5,14 +5,16 @@ import { ILikeService } from '../interfaces/services/ILikeService';
 import { Activity } from '../models';
 import { injectable, inject } from "inversify";
 import { TYPES } from '../di/types';
+import { BaseService } from './BaseService';
 
 @injectable()
-class ActivityService implements IActivityService{
-    @inject(TYPES.EntityManager) 
-    private entityManager: EntityManager;
-
+class ActivityService extends BaseService implements IActivityService{
     @inject(TYPES.LikeService) 
     private likesService: ILikeService;
+
+    constructor(){
+        super();
+    }
 
     async getActivities(options: ActivitySearchParams): Promise<Activity[]> {
         const { limit, offset, order, orderType, host, liked, voted, user } = options;

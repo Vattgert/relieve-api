@@ -1,12 +1,13 @@
-import activityRoutes from './activityRoutes';
 import categoryRoutes from './categoryRoutes';
 import profileRoutes from './profileRoutes';
 
-const allRoutes = [
+/*const allRoutes = [
     activityRoutes,
     categoryRoutes,
     profileRoutes
-];
+];*/
+
+const allRoutes = [];
 
 export default allRoutes;
 

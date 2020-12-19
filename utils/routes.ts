@@ -1,12 +1,13 @@
-import { Route, TopRoute } from '../interfaces/Route';
+import { Route, TopRoute, IRouter } from '../interfaces/Route';
 import { Router } from 'express';
 
 const API_VERSION = "/v1";
 
-function applyRoutes(topRoutes: TopRoute[], router: Router){
-    for (const { path: topPath, routes } of topRoutes) {
-      for(const { method, path, controller } of routes){
-        (router as any)[method](createRoute(API_VERSION, topPath, path), controller.execute);
+function applyRoutes(routers: IRouter[], expressRouter: Router){
+    for (const router of routers) {
+      const routerTopPath = router.getTopRoute()
+      for(const { method, path, controller } of router.getRoutes()){
+        (expressRouter as any)[method](createRoute(API_VERSION, routerTopPath, path), controller.execute);
       }
     }
 };

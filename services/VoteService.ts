@@ -3,12 +3,10 @@ import { Vote } from '../models';
 import { Service } from '../interfaces/Service';
 import { injectable, inject } from "inversify";
 import { TYPES } from '../di/types';
+import { BaseService } from './BaseService';
 
 @injectable()
-class VoteService implements Service{
-    @inject(TYPES.EntityManager) 
-    private entityManager: EntityManager;
-
+class VoteService extends BaseService implements Service{
     async getVotesCountByUser(userId: number | string){
         const count = await this.entityManager.createQueryBuilder()
             .select("COUNT(votes.id)", "votesCount")

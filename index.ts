@@ -4,7 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import './database/TypeORMConnection';
-import './di/compositionRoot';
+import { routers } from './di/compositionRoot';
+
+console.log(routers);
 
 import express from 'express';
 
@@ -15,7 +17,7 @@ const app = express();
 const PORT = 3000;
 
 setupCors(app);
-setupRoutes(app);
+setupRoutes(app, routers);
 
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
