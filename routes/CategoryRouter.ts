@@ -11,7 +11,6 @@ class CategoryRouter implements IRouter{
 
     constructor(
         @inject(TYPES.GetTopCategoriesController) getTopCategoriesController: Controller,
-        @inject(TYPES.GetActivityController) getActivityController: Controller
     ){
         this.topPath = "/categories";
         this.getTopCategoriesController = getTopCategoriesController;
