@@ -15,6 +15,7 @@ class ActivityService extends BaseService implements IActivityService{
         @inject(TYPES.LikeService) likesService: ILikeService
     ){
         super();
+        this.likesService = likesService;
     }
 
     async getActivities(options: ActivitySearchParams): Promise<Activity[]> {
