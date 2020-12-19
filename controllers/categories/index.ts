@@ -1,5 +1,5 @@
-import getTopCategoriesController from './GetTopCategoriesController';
+import { GetTopCategoriesController } from './GetTopCategoriesController';
 
 export {
-    getTopCategoriesController
+    GetTopCategoriesController
 }

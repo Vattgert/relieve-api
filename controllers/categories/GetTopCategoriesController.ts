@@ -1,6 +1,8 @@
 import { Controller } from '../../interfaces/Controller';
 import { Request, Response } from 'express';
+import { injectable } from 'inversify';
 
+@injectable()
 class GetTopCategoriesController implements Controller{
     async execute(req: Request, res: Response): Promise<any>{
         const resourceUrl = "/categories";
@@ -15,7 +17,6 @@ class GetTopCategoriesController implements Controller{
     }
 }
 
-export default new GetTopCategoriesController();
 export {
     GetTopCategoriesController
 }
