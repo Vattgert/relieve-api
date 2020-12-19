@@ -9,7 +9,7 @@ class GetActivityController implements Controller{
     @inject(TYPES.ActivityService) 
     private activityService: IActivityService;
 
-    execute(req: Request, res: Response): void{
+    async execute(req: Request, res: Response): Promise<any>{
         const { activityId } = req.params;
         const activityPromise = this.activityService.getActivityById(activityId);
         activityPromise.then(activity => {

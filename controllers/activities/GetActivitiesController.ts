@@ -13,7 +13,7 @@ class GetActivitiesController implements Controller{
     @inject(TYPES.ActivityService) 
     public activityService: IActivityService;
 
-    execute(req: Request, res: Response, next: NextFunction): void{
+    async execute(req: Request, res: Response, next: NextFunction): Promise<any>{
         const { host, liked, voted, user } = req.query;
         const searchParams = new ActivitySearchParams();
         searchParams.limit = 20;

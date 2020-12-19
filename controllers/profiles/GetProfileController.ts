@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import profileService from '../../services/ProfileService';
 
 class GetProfileController implements Controller{
-    execute(req: Request, res: Response): void{
+    async execute(req: Request, res: Response): Promise<any>{
         const { userId } = req.params;
 
         const profilePromise = profileService.getProfileById(userId);
