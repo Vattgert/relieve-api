@@ -19,6 +19,16 @@ class GetActivitiesController implements Controller{
     }
 
     async execute(req: Request, res: Response, next: NextFunction): Promise<any>{
+        try{
+            const searchParams = this.getActivitySearchParams(req);
+            const activities = await this.activityService.getActivities(searchParams);
+            res.send(activities);
+        } catch(error) {
+            res.send({ error });
+        }
+    }
+
+    getActivitySearchParams(req): ActivitySearchParams{
         const { host, liked, voted, user } = req.query;
         const searchParams = new ActivitySearchParams();
         searchParams.limit = 20;
@@ -29,15 +39,7 @@ class GetActivitiesController implements Controller{
         searchParams.user = user ? user.toString() : '';
         searchParams.liked = liked === '';
         searchParams.voted = voted === '';
-        //Temporarily type cast
-        //res.send({ lol: "lol" });
-
-        try{
-            const activities = await this.activityService.getActivities(searchParams);
-            res.send(activities);
-        } catch(error) {
-            res.send({ error })
-        }
+        return searchParams;
     }
 }
 
