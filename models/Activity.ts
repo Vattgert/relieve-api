@@ -29,6 +29,7 @@ class Activity {
     description: string
 
     totalLikes: number;
+    meanRating: number;
 
     @ManyToOne(() => Host, host => host.activities)
     @JoinColumn({ name: "host_id" })
