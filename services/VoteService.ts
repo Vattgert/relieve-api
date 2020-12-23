@@ -13,6 +13,14 @@ class VoteService extends BaseService implements IVoteService{
             .getRawOne();
         return count;
     }
+
+    async getVotesByActivity(activityId: number | string): Promise<Vote[]>{
+        const votes = await this.getManager().createQueryBuilder(Vote, "votes")
+            .leftJoinAndSelect("votes.voter", "voter")
+            .where("votes.activity_id = :activityId", { activityId })
+        
+        return votes.getMany();
+    }
 }
 
 export { VoteService }

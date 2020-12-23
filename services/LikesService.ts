@@ -1,8 +1,6 @@
 import { ILikeService } from '../interfaces/services/ILikeService';
-import { EntityManager } from 'typeorm';
 import { Like } from '../models';
-import { injectable, inject } from "inversify";
-import { TYPES } from '../di/types';
+import { injectable } from "inversify";
 
 import { BaseService } from './BaseService';
 
@@ -16,6 +14,14 @@ class LikesService extends BaseService implements ILikeService{
             .where("likes.activity_id = :id", { id: activityId})
             .getRawOne();
         return count;
+    }
+
+    async getActivityLikes(activityId: number | string): Promise<Like[]>{
+        const likes = await this.getManager().createQueryBuilder(Like, "like")
+            .leftJoinAndSelect("like.liker", "liker")
+            .where("like.activity_id = :activityId", { activityId })
+            .take(5)
+        return likes.getMany();
     }
 
     async getLikesCountByUser(userId: number | string){
