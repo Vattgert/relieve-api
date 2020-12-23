@@ -22,15 +22,14 @@ class GetActivitiesController implements Controller{
         try{
             const searchParams = this.getActivitySearchParams(req.query);
             const activities = await this.activityService.getActivities(searchParams);
-            res.send(activities);
+            res.status(200).send(activities);
         } catch(error) {
-            res.send({ error: error.message });
+            res.status(500).send({ error: error.message });
         }
     }
 
     getActivitySearchParams(propertyObject): ActivitySearchParams{
         const searchParams = new ActivitySearchParams(propertyObject);
-        console.log(searchParams);
         return searchParams;
     }
 }
