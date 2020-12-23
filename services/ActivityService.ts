@@ -53,7 +53,7 @@ class ActivityService extends BaseService implements IActivityService{
         }
     }
 
-    private getActivitiesQuery(params){
+    private getActivitiesQuery(params): Promise<Activity[]>{
         const { limit, offset, order, orderType, host, liked, voted, user } = params;
             
         const activitiesQuery = this.getManager().createQueryBuilder(Activity, "activities")
@@ -61,7 +61,7 @@ class ActivityService extends BaseService implements IActivityService{
             .leftJoinAndSelect("activities.tags", "tags")
             .leftJoin("activities.likes", "likes")
             .leftJoin("likes.liker", "liker")
-            .leftJoin("activities.votes", "votes")
+            .leftJoinAndSelect("activities.votes", "votes")
             .leftJoin("votes.voter", "voter")
             .orderBy(`activities.${order}`, orderType)
             .take(limit)

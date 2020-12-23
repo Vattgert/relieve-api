@@ -1,4 +1,4 @@
-import { Entity, OneToOne, PrimaryColumn, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, OneToOne, PrimaryColumn, JoinColumn, ManyToOne, CreateDateColumn } from "typeorm";
 import { Activity } from "./Activity";
 import { Customer } from "./Customer";
 
@@ -14,6 +14,9 @@ class Like{
     @OneToOne(() => Customer)
     @JoinColumn({ name: "user_id" })
     liker: Customer;
+
+    @CreateDateColumn({ type: "time with time zone", name: "created_at" })
+    createdAt: string;
 }
 
 export { Like }
