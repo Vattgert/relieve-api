@@ -10,7 +10,7 @@ import { BaseService } from './BaseService';
 class LikesService extends BaseService implements ILikeService{
 
     async getLikesCountByActivity(activityId: number | string){
-        const count = await this.entityManager.createQueryBuilder()
+        const count = await this.getManager().createQueryBuilder()
             .select("COUNT(likes.id)")
             .from(Like, "likes")
             .where("likes.activity_id = :id", { id: activityId})
@@ -19,7 +19,7 @@ class LikesService extends BaseService implements ILikeService{
     }
 
     async getLikesCountByUser(userId: number | string){
-        const count = await this.entityManager.createQueryBuilder()
+        const count = await this.getManager().createQueryBuilder()
             .select("COUNT(likes.id)", "likesCount")
             .from(Like, "likes")
             .where("likes.user_id = :userId", { userId })

@@ -25,7 +25,7 @@ class ProfileService extends BaseService implements IProfileService{
         const { likesCount } = await this.likeService.getLikesCountByUser(userId);
         const { votesCount } = await this.voteService.getVotesCountByUser(userId);
 
-        const profile = await this.entityManager.createQueryBuilder(Customer, "profile")
+        const profile = await this.getManager().createQueryBuilder(Customer, "profile")
             .where("profile.id = :userId", { userId })
             .getOne();
 
