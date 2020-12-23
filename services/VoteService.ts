@@ -6,7 +6,7 @@ import { BaseService } from './BaseService';
 @injectable()
 class VoteService extends BaseService implements IVoteService{
     async getVotesCountByUser(userId: number | string){
-        const count = await this.entityManager.createQueryBuilder()
+        const count = await this.getManager().createQueryBuilder()
             .select("COUNT(votes.id)", "votesCount")
             .from(Vote, "votes")
             .where("votes.user_id = :userId", { userId })
