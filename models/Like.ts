@@ -4,7 +4,7 @@ import { Customer } from "./Customer";
 
 @Entity("likes")
 class Like{
-    @PrimaryColumn({ select: false })
+    @PrimaryColumn()
     id: number;
 
     @ManyToOne(() => Activity, activity => activity.likes)
