@@ -1,14 +1,15 @@
-import { validateOrReject } from 'class-validator';
-import { IActivityService } from '../interfaces/services/IActivityService';
-import { ActivitySearchParams } from '../utils/requests/ActivitySearchOptions';
-import { ILikeService } from '../interfaces/services/ILikeService';
-import { Activity } from '../models';
 import { injectable, inject } from "inversify";
 import { TYPES } from '../di/types';
-import { BaseService } from './BaseService';
-import { getMessageFromValidationError, isValidationError } from '../utils/error';
-import { QueryFailedError } from 'typeorm';
+
+import { IActivityService } from '../interfaces/services/IActivityService';
+import { ILikeService } from '../interfaces/services/ILikeService';
 import { IVoteService } from '../interfaces/services';
+
+import { BaseService } from './BaseService';
+import { Activity } from '../models';
+import { ActivitySearchParams } from '../utils/requests/ActivitySearchOptions';
+
+import { validateOrReject } from 'class-validator';
 
 @injectable()
 class ActivityService extends BaseService implements IActivityService{
@@ -27,8 +28,7 @@ class ActivityService extends BaseService implements IActivityService{
     async getActivities(params: ActivitySearchParams): Promise<Activity[]> {
         try{
             await validateOrReject(params);
-            const activities = await this.getActivitiesQuery(params);
-            return activities;
+            return this.getActivitiesQuery(params);
         } catch (error) {
             const errorMessage = this.getProperErrorMessage(error);
             throw new Error(errorMessage);
@@ -53,7 +53,7 @@ class ActivityService extends BaseService implements IActivityService{
         }
     }
 
-    private getActivitiesQuery(params): Promise<Activity[]>{
+    private getActivitiesQuery(params: ActivitySearchParams): Promise<Activity[]>{
         const { limit, offset, order, orderType, host, liked, voted, user } = params;
             
         const activitiesQuery = this.getManager().createQueryBuilder(Activity, "activities")
