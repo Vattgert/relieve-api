@@ -12,7 +12,7 @@ class ProfileRouter implements IRouter{
     constructor(
         @inject(TYPES.GetProfileController) getProfileController: Controller,
     ){
-        this.topPath = "/profiles";
+        this.topPath = "/users";
         this.getProfileController = getProfileController;
     }
 
@@ -27,6 +27,16 @@ class ProfileRouter implements IRouter{
                 controller: this.getProfileController, 
                 method: "get" 
             },
+            {
+                path: "/:userId/followers", 
+                controller: this.getProfileController, 
+                method: "get" 
+            },
+            {
+                path: "/:userId/followings", 
+                controller: this.getProfileController, 
+                method: "get" 
+            }
         ]
     }
 }
