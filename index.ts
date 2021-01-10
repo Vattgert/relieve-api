@@ -3,7 +3,8 @@ import 'reflect-metadata';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import './database/TypeORMConnection';
+import connection from './database/TypeORMConnection';
+connection.create()
 import { routers } from './di/compositionRoot';
 
 import express from 'express';
@@ -20,5 +21,3 @@ setupRoutes(app, routers);
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 });
-
-export { app }

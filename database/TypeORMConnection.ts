@@ -1,7 +1,7 @@
-import { createConnection } from "typeorm";
+import { createConnection, getConnection } from "typeorm";
 import { Activity, Host, Customer, Tag, Vote, Like } from '../models';
 
-(async () => {
+const createTypeORMConnection = async () => {
     try{
         const connection = await createConnection({
             type: "postgres",
@@ -18,6 +18,19 @@ import { Activity, Host, Customer, Tag, Vote, Like } from '../models';
         
         const query = await connection.query("select 1;");
     } catch(error){
+        console.log("Db err");
         console.error(error);
     }
-})()
+}
+
+const connection = {
+    async create(){
+        await createTypeORMConnection();
+    },
+
+    async close(){
+        await getConnection().close(); 
+    },
+}
+
+export default connection;
