@@ -3,7 +3,8 @@ import 'reflect-metadata';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import './database/TypeORMConnection';
+import connection from './database/TypeORMConnection';
+connection.create()
 import { routers } from './di/compositionRoot';
 
 import express from 'express';
