@@ -5,30 +5,30 @@ import { IRouter, Route} from '../interfaces/Route';
 
 @injectable()
 class ProfileRouter implements IRouter{
-    private getProfileController: Controller;
+	private getProfileController: Controller;
 
-    private topPath: string;
+	private topPath: string;
 
-    constructor(
-        @inject(TYPES.GetProfileController) getProfileController: Controller,
-    ){
-        this.topPath = "/profiles";
-        this.getProfileController = getProfileController;
-    }
+	constructor(
+		@inject(TYPES.GetProfileController) getProfileController: Controller,
+	){
+		this.topPath = '/profiles';
+		this.getProfileController = getProfileController;
+	}
 
-    getTopRoute(): string{
-        return this.topPath;
-    }
+	getTopRoute(): string{
+		return this.topPath;
+	}
 
-    getRoutes(): Route[]{
-        return [
-            { 
-                path: "/:userId", 
-                controller: this.getProfileController, 
-                method: "get" 
-            },
-        ]
-    }
+	getRoutes(): Route[]{
+		return [
+			{ 
+				path: '/:userId', 
+				controller: this.getProfileController, 
+				method: 'get' 
+			},
+		];
+	}
 }
 
-export { ProfileRouter }
+export { ProfileRouter };

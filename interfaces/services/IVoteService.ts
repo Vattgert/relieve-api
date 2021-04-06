@@ -1,4 +1,4 @@
-import { Vote } from "../../models";
+import { Vote } from '../../models';
 
 export interface IVoteService{
     getVotesCountByUser(userId: string | number): Promise<any>;

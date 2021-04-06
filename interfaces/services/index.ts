@@ -4,8 +4,8 @@ import { IProfileService } from './IProfileService';
 import { IVoteService } from './IVoteService';
 
 export{
-    IActivityService,
-    ILikeService,
-    IProfileService,
-    IVoteService
-}
+	IActivityService,
+	ILikeService,
+	IProfileService,
+	IVoteService
+};

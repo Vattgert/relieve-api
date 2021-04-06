@@ -1,5 +1,0 @@
-interface Database{
-
-}
-
-export { Database }
