@@ -1,9 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, OneToOne, JoinColumn } from "typeorm";
+import { Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Activity } from './Activity';
 import { User } from './User';
 
 
-@Entity("users")
+@Entity('users')
 class Host extends User{
 
     @PrimaryGeneratedColumn()
@@ -13,4 +13,4 @@ class Host extends User{
     activities: Activity[];
 }
 
-export { Host }
+export { Host };

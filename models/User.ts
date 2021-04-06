@@ -1,12 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Column } from 'typeorm';
 import { IsUrl } from 'class-validator';
 
 abstract class User {
 
-    @Column({ name: "first_name" })
+    @Column({ name: 'first_name' })
     firstName: string;
 
-    @Column({ name: "last_name" })
+    @Column({ name: 'last_name' })
     lastName: string;
 
     @Column()
@@ -28,4 +28,4 @@ abstract class User {
 
 }
 
-export { User }
+export { User };
