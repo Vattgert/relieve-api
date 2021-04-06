@@ -1,5 +1,5 @@
-import { container } from "./inversify.config";
-import { TYPES } from "./types";
+import { container } from './inversify.config';
+import { TYPES } from './types';
 
 import { IRouter } from '../interfaces/Route';
 
@@ -9,11 +9,11 @@ const categoryRouter = container.get<IRouter>(TYPES.CategoryRouter);
 const profileRouter = container.get<IRouter>(TYPES.ProfileRouter);
 
 const routers = [
-    activityRouter,
-    categoryRouter,
-    profileRouter
-]
+	activityRouter,
+	categoryRouter,
+	profileRouter
+];
 
 export {
-    routers
-}
+	routers
+};

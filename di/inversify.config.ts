@@ -1,10 +1,10 @@
-import { Container } from "inversify";
-import { TYPES } from "./types";
+import { Container } from 'inversify';
+import { TYPES } from './types';
 import { Controller } from '../interfaces/Controller';
 import { IActivityService, ILikeService, IVoteService, IProfileService } from '../interfaces/services/';
 import { IRouter } from '../interfaces/Route';
 
-import { ActivityService, ProfileService, VoteService, LikesService } from "../services";
+import { ActivityService, ProfileService, VoteService, LikesService } from '../services';
 
 import { GetActivitiesController } from '../controllers/activities/GetActivitiesController';
 import { GetActivityController } from '../controllers/activities/GetActivityController';
@@ -32,4 +32,4 @@ container.bind<IProfileService>(TYPES.ProfileService).to(ProfileService);
 container.bind<IVoteService>(TYPES.VoteService).to(VoteService);
 container.bind<ILikeService>(TYPES.LikeService).to(LikesService);
 
-export { container }
+export { container };
