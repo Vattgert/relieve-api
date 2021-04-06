@@ -16,4 +16,4 @@ interface IRouter{
     getRoutes(): Route[];
 }
 
-export { TopRoute, Route, IRouter }
+export { TopRoute, Route, IRouter };

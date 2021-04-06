@@ -5,4 +5,4 @@ interface Controller{
     execute(req: Request, res: Response, next: NextFunction): Promise<any>
 }
 
-export { Controller }
+export { Controller };
