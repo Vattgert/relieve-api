@@ -5,25 +5,25 @@ import { QueryFailedError } from 'typeorm';
 
 @injectable()
 class BaseService{
-    private entityManager: EntityManager;
+	private entityManager: EntityManager;
 
-    constructor(){
-        this.entityManager = getManager();
-    }
+	constructor(){
+		this.entityManager = getManager();
+	}
 
-    protected getManager(): EntityManager{
-        return this.entityManager;
-    }
+	protected getManager(): EntityManager{
+		return this.entityManager;
+	}
 
-    protected getProperErrorMessage(error): string{
-        let errorMessage = 'Unexpected error occured';
-        if(isValidationError(error)){   
-            errorMessage = getMessageFromValidationError(error);
-        } else if(error instanceof QueryFailedError){
-            errorMessage = `Error occured while retrieving activities.`;
-        }
-        return errorMessage;
-    }
+	protected getProperErrorMessage(error): string{
+		let errorMessage = 'Unexpected error occured';
+		if(isValidationError(error)){   
+			errorMessage = getMessageFromValidationError(error);
+		} else if(error instanceof QueryFailedError){
+			errorMessage = 'Error occured while retrieving activities.';
+		}
+		return errorMessage;
+	}
 }
 
-export { BaseService }
+export { BaseService };
