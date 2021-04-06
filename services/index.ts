@@ -4,8 +4,8 @@ import { ActivityService } from './ActivityService';
 import { ProfileService } from './ProfileService';
 
 export {
-    ActivityService,
-    VoteService,
-    LikesService,
-    ProfileService
-}
+	ActivityService,
+	VoteService,
+	LikesService,
+	ProfileService
+};
