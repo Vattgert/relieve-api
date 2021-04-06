@@ -1,11 +1,11 @@
-import { Controller } from "../interfaces/Controller"
+import { Controller } from '../interfaces/Controller';
 
 class RoutesLoader{
-    private controllers: Controller[];
-    
-    constructor(controllers){
-        this.controllers = controllers;
-    }
+	private controllers: Controller[];
+
+	constructor(controllers){
+		this.controllers = controllers;
+	}
 }
 
-export { }
+export { RoutesLoader };
