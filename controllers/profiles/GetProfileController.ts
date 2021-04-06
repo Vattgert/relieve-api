@@ -6,31 +6,31 @@ import { IProfileService } from '../../interfaces/services';
 
 @injectable()
 class GetProfileController implements Controller{
-    private profileService: IProfileService;
+	private profileService: IProfileService;
 
-    constructor(
-        @inject(TYPES.ProfileService) profileService: IProfileService
-    ){
-        this.profileService = profileService;
-    }
+	constructor(
+		@inject(TYPES.ProfileService) profileService: IProfileService
+	){
+		this.profileService = profileService;
+	}
 
-    async execute(req: Request, res: Response): Promise<any>{
-        const { userId } = req.params;
+	async execute(req: Request, res: Response): Promise<any>{
+		const { userId } = req.params;
 
-        const profilePromise = this.profileService.getProfileById(userId);
+		const profilePromise = this.profileService.getProfileById(userId);
 
-        profilePromise.then((profile) => {
-            if(profile){
-                res.send(profile);
-            }
-        })
+		profilePromise.then((profile) => {
+			if(profile){
+				res.send(profile);
+			}
+		});
 
-        profilePromise.catch((error) => {
-            res.send(error);
-        })
-    }
+		profilePromise.catch((error) => {
+			res.send(error);
+		});
+	}
 }
 
 export {
-    GetProfileController
-}
+	GetProfileController
+};
