@@ -1,8 +1,8 @@
-import { Controller } from '../../interfaces/Controller';
+import { Controller } from '../../types/Controller';
 import { Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../di/types';
-import { IProfileService } from '../../interfaces/services';
+import { IProfileService } from '../../types/services';
 
 @injectable()
 class GetProfileController implements Controller{

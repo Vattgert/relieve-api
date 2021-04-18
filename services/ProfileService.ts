@@ -2,7 +2,7 @@ import { Customer } from '../models';
 
 import { injectable, inject } from 'inversify';
 import { TYPES } from '../di/types';
-import { ILikeService, IProfileService, IVoteService } from '../interfaces/services/';
+import { ILikeService, IProfileService, IVoteService } from '../types/services';
 
 import { BaseService } from './BaseService';
 

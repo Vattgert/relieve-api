@@ -1,5 +1,5 @@
 import { Vote } from '../models';
-import { IVoteService } from '../interfaces/services';
+import { IVoteService } from '../types/services';
 import { injectable } from 'inversify';
 import { BaseService } from './BaseService';
 

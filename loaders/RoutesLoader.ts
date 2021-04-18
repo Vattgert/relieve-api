@@ -1,4 +1,4 @@
-import { Controller } from '../interfaces/Controller';
+import { Controller } from '../types/Controller';
 
 class RoutesLoader{
 	private controllers: Controller[];

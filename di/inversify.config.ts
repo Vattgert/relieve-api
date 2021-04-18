@@ -1,8 +1,8 @@
 import { Container } from 'inversify';
 import { TYPES } from './types';
-import { Controller } from '../interfaces/Controller';
-import { IActivityService, ILikeService, IVoteService, IProfileService } from '../interfaces/services/';
-import { IRouter } from '../interfaces/Route';
+import { Controller } from '../types/Controller';
+import { IActivityService, ILikeService, IVoteService, IProfileService } from '../types/services';
+import { IRouter } from '../types/Route';
 
 import { ActivityService, ProfileService, VoteService, LikesService } from '../services';
 

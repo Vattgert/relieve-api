@@ -1,7 +1,7 @@
 import { container } from './inversify.config';
 import { TYPES } from './types';
 
-import { IRouter } from '../interfaces/Route';
+import { IRouter } from '../types/Route';
 
 
 const activityRouter = container.get<IRouter>(TYPES.ActivityRouter);

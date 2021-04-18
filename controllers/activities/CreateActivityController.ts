@@ -1,4 +1,4 @@
-import { Controller } from '../../interfaces/Controller';
+import { Controller } from '../../types/Controller';
 import { Request, Response } from 'express';
 import { injectable } from 'inversify';
 

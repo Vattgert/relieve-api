@@ -1,4 +1,4 @@
-import { ILikeService } from '../interfaces/services/ILikeService';
+import { ILikeService } from '../types/services/ILikeService';
 import { Like } from '../models';
 import { injectable } from 'inversify';
 

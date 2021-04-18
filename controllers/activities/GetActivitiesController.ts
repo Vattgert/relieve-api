@@ -1,8 +1,8 @@
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../di/types';
 
-import { Controller } from '../../interfaces/Controller';
-import { IActivityService } from '../../interfaces/services/IActivityService';
+import { Controller } from '../../types/Controller';
+import { IActivityService } from '../../types/services/IActivityService';
 import { ActivitySearchParams } from '../../utils/requests/ActivitySearchOptions';
 
 import { Request, Response, NextFunction } from 'express';

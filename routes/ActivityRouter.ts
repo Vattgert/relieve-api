@@ -1,7 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../di/types';
-import { Controller } from '../interfaces/Controller';
-import { IRouter, Route } from '../interfaces/Route';
+import { Controller } from '../types/Controller';
+import { IRouter, Route } from '../types/Route';
 
 @injectable()
 class ActivityRouter implements IRouter {

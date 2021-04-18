@@ -1,9 +1,9 @@
 import { injectable, inject } from 'inversify';
 import { TYPES } from '../di/types';
 
-import { IActivityService } from '../interfaces/services/IActivityService';
-import { ILikeService } from '../interfaces/services/ILikeService';
-import { IVoteService } from '../interfaces/services';
+import { IActivityService } from '../types/services/IActivityService';
+import { ILikeService } from '../types/services/ILikeService';
+import { IVoteService } from '../types/services';
 
 import { BaseService } from './BaseService';
 import { Activity } from '../models';

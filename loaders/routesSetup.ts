@@ -1,5 +1,5 @@
 import { Express } from 'express';
-import { IRouter } from '../interfaces/Route';
+import { IRouter } from '../types/Route';
 import { applyRoutes } from '../utils/routes';
 
 function setupRoutes(app: Express, routers: IRouter[]): void{

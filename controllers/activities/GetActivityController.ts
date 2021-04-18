@@ -1,6 +1,6 @@
-import { Controller } from '../../interfaces/Controller';
+import { Controller } from '../../types/Controller';
 import { Request, Response } from 'express';
-import { IActivityService } from '../../interfaces/services/IActivityService';
+import { IActivityService } from '../../types/services/IActivityService';
 import { TYPES } from '../../di/types';
 import { inject, injectable } from 'inversify';
 
