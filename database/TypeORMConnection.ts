@@ -18,7 +18,7 @@ const createTypeORMConnection = async (databaseConfig) => {
 
 const connection = {
 
-	async create(databaseConfig): Promise<void>{
+	async create(databaseConfig: Record<string, any>): Promise<void>{
 		await createTypeORMConnection(databaseConfig);
 	},
 

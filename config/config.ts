@@ -7,9 +7,9 @@ const dev = {
 	db: {
 		host: process.env.DB_DEV_HOST || 'localhost',
 		port: parseInt(process.env.DB_DEV_PORT) || 5432,
-		user: process.env.DB_DEV_USER,
+		username: process.env.DB_DEV_USER,
 		password: process.env.DB_DEV_PASSWORD,
-		name: process.env.DB_DEV_NAME
+		database: process.env.DB_DEV_NAME
 	}
 };
 

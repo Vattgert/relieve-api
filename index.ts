@@ -9,10 +9,8 @@ const { db, app } = config;
 import connection from './database/TypeORMConnection';
 connection.create(db);
 
-import { routers } from './di/compositionRoot';
-
 import express from 'express';
-
+import { routers } from './di/compositionRoot';
 import { setupCors } from './loaders/corsSetup';
 import { setupRoutes } from './loaders/routesSetup';
 
@@ -21,6 +19,6 @@ const relieveApplication = express();
 setupCors(relieveApplication);
 setupRoutes(relieveApplication, routers);
 
-app.listen(app.port, () => {
+relieveApplication.listen(app.port, () => {
 	console.log(`⚡️[server]: Server is running at http://localhost:${app.port}`);
 });
