@@ -1,33 +1,28 @@
 import { createConnection, getConnection } from 'typeorm';
 import { Activity, Host, Customer, Tag, Vote, Like } from '../models';
 
-const createTypeORMConnection = async () => {
+const createTypeORMConnection = async (databaseConfig) => {
 	try{
 		await createConnection({
 			type: 'postgres',
-			host: process.env.DB_LOCAL_HOST,
-			port: 5432,
-			username: process.env.DB_LOCAL_USER,
-			password: process.env.DB_LOCAL_PASS,
-			database: process.env.DB_LOCAL_NAME,
+			...databaseConfig,
 			entities: [
 				Activity, Host, Customer, Tag, Vote, Like
 			],
 			logging: ['query', 'error']
 		});
-
-		//const query = await connection.query("select 1;");
 	} catch(error){
 		console.error(error);
 	}
 };
 
 const connection = {
-	async create(){
-		await createTypeORMConnection();
+
+	async create(databaseConfig): Promise<void>{
+		await createTypeORMConnection(databaseConfig);
 	},
 
-	async close(){
+	async close(): Promise<void>{
 		await getConnection().close(); 
 	},
 };

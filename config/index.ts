@@ -1,5 +1,3 @@
-import databaseLocalConfig from './DatabaseLocalConfig';
+import config from './config';
 
-export {
-	databaseLocalConfig
-};
+export default config;

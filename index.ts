@@ -3,8 +3,12 @@ import 'reflect-metadata';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import config from './config';
+const { db, app } = config;
+
 import connection from './database/TypeORMConnection';
-connection.create()
+connection.create(db);
+
 import { routers } from './di/compositionRoot';
 
 import express from 'express';
@@ -12,12 +16,11 @@ import express from 'express';
 import { setupCors } from './loaders/corsSetup';
 import { setupRoutes } from './loaders/routesSetup';
 
-const app = express();
-const PORT = 3000;
+const relieveApplication = express();
 
-setupCors(app);
-setupRoutes(app, routers);
+setupCors(relieveApplication);
+setupRoutes(relieveApplication, routers);
 
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+app.listen(app.port, () => {
+	console.log(`⚡️[server]: Server is running at http://localhost:${app.port}`);
 });
